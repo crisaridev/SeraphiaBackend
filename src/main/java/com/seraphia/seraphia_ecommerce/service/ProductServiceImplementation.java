@@ -97,8 +97,8 @@ public class ProductServiceImplementation implements ProductService {
         if(productUpdated.getDescription() != null) originalProduct.setDescription(productUpdated.getDescription());
         if (productUpdated.getPrice() != null) originalProduct.setPrice(productUpdated.getPrice());
         if(productUpdated.getStock() != null) originalProduct.setStock(productUpdated.getStock());
-        if (productUpdated.getCreation_date() != null) originalProduct.setCreation_date(productUpdated.getCreation_date());
-        if (productUpdated.getIs_available() != null) originalProduct.setIs_available(productUpdated.getIs_available());
+        if (productUpdated.getCreationDate() != null) originalProduct.setCreationDate(productUpdated.getCreationDate());
+        if (productUpdated.getIsAvailable() != null) originalProduct.setIsAvailable(productUpdated.getIsAvailable());
         return productRepository.save(originalProduct);
 }
 }

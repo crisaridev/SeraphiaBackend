@@ -1,7 +1,6 @@
 package com.seraphia.seraphia_ecommerce.model;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,7 +13,7 @@ public class Product {
     //para dejarlo autoincremental
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
-    private Long id_product;
+    private Long idProduct;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -29,31 +28,31 @@ public class Product {
     private Integer stock;
 
     @Column(name = "creation_date", nullable = false)
-    private Date creation_date;
+    private Date creationDate;
 
     @Column(name = "is_available", nullable = false)
-    private Boolean is_available;
+    private Boolean isAvailable;
 
-    public Product(Long id_product, String name, String description, Double price, Integer stock, Date creation_date, Boolean is_available) {
-        this.id_product = id_product;
+    public Product(Long idProduct, String name, String description, Double price, Integer stock, Date creationDate, Boolean isAvailable) {
+        this.idProduct = idProduct;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.creation_date = creation_date;
-        this.is_available = is_available;
+        this.creationDate = creationDate;
+        this.isAvailable = isAvailable;
     }
 
     public Product() {
-        this.creation_date = new Date(); // Valor por defecto
+        this.creationDate = new Date(); // Valor por defecto
     }
 
-    public Long getId_product() {
-        return id_product;
+    public Long getIdProduct() {
+        return idProduct;
     }
 
-    public void setId_product(Long id_product) {
-        this.id_product = id_product;
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getName() {
@@ -88,19 +87,19 @@ public class Product {
         this.stock = stock;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Boolean getIs_available() {
-        return is_available;
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setIs_available(Boolean is_available) {
-        this.is_available = is_available;
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }
