@@ -48,11 +48,11 @@ public class ProductController {
         return this.productService.deleteProductById(id_product);
     }
 
-    //PeticionPut
-    @PutMapping(path = "{productId}")
-    public Product updateProductById(@PathVariable("productId") Long id_product, @RequestBody Product productUpdated){
-        return  this.productService.updateProductById(id_product, productUpdated);
-    }
+//PeticionPut
+@PutMapping(path = "{productId}")
+public Product updateProductById(@PathVariable("productId") Long id_product, @RequestBody Product productUpdated){
+    return  this.productService.updateProductById(id_product, productUpdated);
+}
 
 
 
