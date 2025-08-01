@@ -1,10 +1,13 @@
 package com.seraphia.seraphia_ecommerce.service;
 
 import com.seraphia.seraphia_ecommerce.model.Cart;
+import com.seraphia.seraphia_ecommerce.model.User;
 import com.seraphia.seraphia_ecommerce.repository.CartRepository;
+import com.seraphia.seraphia_ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,10 +34,12 @@ public class CartServiceImplementation  implements CartService{
     //Una variable que holdee el objeto que vamos a consumir (el repository)
 
     private final CartRepository cartRepository;
+    private final UserRepository userRepository;
     @Autowired
     //Spring < 3.2 afuerza es la notacion @autowired para decir que es una inyeccion de dependencia
-    public CartServiceImplementation(CartRepository cartRepository){
+    public CartServiceImplementation(CartRepository cartRepository, UserRepository userRepository) {
         this.cartRepository = cartRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -94,5 +99,20 @@ public class CartServiceImplementation  implements CartService{
         if(cartUpdated.getDateModification() != null) originalCart.setDateCreation(cartUpdated.getDateModification());
 
         return cartRepository.save(originalCart);
+    }
+
+    @Override
+    public Cart createCartForUser(Long id_user) {
+        User user = userRepository.findById(id_user)
+                .orElseThrow(() -> new IllegalArgumentException("El usuario con el id " + id_user + " no existe"));
+
+        if (cartRepository.existsByUser(user)) {
+            throw new RuntimeException("El usuario ya tiene un carrito");
+        }
+
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cart.setDateCreation(LocalDateTime.now());
+        return cartRepository.save(cart);
     }
 }

@@ -55,4 +55,10 @@ public class CartController {
         return this.cartService.updateCartById(id_cart,cartUpdated);
     }
 
+    //Peticion Post para añadir usuario al carrito
+    @PostMapping(path = "{userId}")//@RequestBody indica que la peticion tiene un body con informacion
+    public Cart createCartForUser(@Valid @PathVariable("userId")Long id_user){
+        return this.cartService.createCartForUser(id_user);
+    }
+
 }

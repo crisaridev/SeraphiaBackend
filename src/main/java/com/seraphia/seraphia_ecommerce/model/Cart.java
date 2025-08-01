@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -25,9 +27,9 @@ public class Cart {
     @Column(name = "id_cart")
     private Long idCart;
 
-    @Column(name = "date_creation", nullable = false)
-    @NotNull(message = "La fecha de creacion es obligatoria")
-    @FutureOrPresent(message = "La fecha debe ser actual o futura")
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    //@NotNull(message = "La fecha de creacion es obligatoria")
+    //@FutureOrPresent(message = "La fecha debe ser actual o futura")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreation;
 
@@ -36,4 +38,8 @@ public class Cart {
     @FutureOrPresent(message = "La fecha debe ser actual o futura")
     private LocalDateTime dateModification;
 
+    //Tabla Principal o tabla base
+    @OneToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user",  foreignKey = @ForeignKey(name = "fk_cart_user"))
+    private User user;
 }

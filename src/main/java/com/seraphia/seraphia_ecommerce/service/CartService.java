@@ -28,4 +28,6 @@ public interface CartService {
     //La firma del metodo, la primera parte es el valor de retorno.
     //Segunda parte el nombre del metodo y tercera parametros
 
+    // Método para crear un carrito asociado a un usuario
+    Cart createCartForUser(Long id_user);
 }
