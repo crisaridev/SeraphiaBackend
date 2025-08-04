@@ -32,11 +32,13 @@ public class UserServiceImplementation implements UserService{
     //Una variable que holdee el objeto que vamos a consumir (el repository)
 
     private final UserRepository userRepository;
+    private final CartServiceImplementation cartServiceImplementation;
 
     @Autowired
     //Spring < 3.2 afuerza es la notacion @autowired para decir que es una inyeccion de dependencia
-    public UserServiceImplementation(UserRepository userRepository){
+    public UserServiceImplementation(UserRepository userRepository, CartServiceImplementation cartServiceImplementation){
         this.userRepository = userRepository;
+        this.cartServiceImplementation = cartServiceImplementation;
     }
 
 
@@ -72,11 +74,16 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public List<User> addUsers(List<User> users) {
-        //El metodo save sirve para
-        //Actualizar: Si existe lo actualiza
-        //Guardar: Si no existe lo crea
-        return userRepository.saveAll(users);
+    public User addUser(User user) {
+        // 1. Primero guarda el usuario (esto le asigna un ID)
+        User savedUser = userRepository.save(user);
+
+        // 2. Crea el carrito asociado al usuario ya guardado
+        cartServiceImplementation.createCartForUser(savedUser.getIdUser());
+
+        // 3. Si necesitas actualizar alguna referencia, hazlo aquí
+        // (Normalmente no es necesario volver a guardar el usuario)
+        return savedUser;
     }
 
     @Override

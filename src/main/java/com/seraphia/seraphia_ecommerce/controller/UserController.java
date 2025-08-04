@@ -39,8 +39,8 @@ public class UserController {
 
     //Peticion Post
     @PostMapping//@RequestBody indica que la peticion tiene un body con informacion
-    public List<User> addUsers(@Valid @RequestBody List<User> users){
-        return this.userService.addUsers(users);
+    public User addUser(@Valid @RequestBody User user){
+        return this.userService.addUser(user);
     }
 
     //Peticion Delete

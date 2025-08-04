@@ -105,11 +105,6 @@ public class CartServiceImplementation  implements CartService{
     public Cart createCartForUser(Long id_user) {
         User user = userRepository.findById(id_user)
                 .orElseThrow(() -> new IllegalArgumentException("El usuario con el id " + id_user + " no existe"));
-
-        if (cartRepository.existsByUser(user)) {
-            throw new RuntimeException("El usuario ya tiene un carrito");
-        }
-
         Cart cart = new Cart();
         cart.setUser(user);
         cart.setDateCreation(LocalDateTime.now());

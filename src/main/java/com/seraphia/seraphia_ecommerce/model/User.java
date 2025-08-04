@@ -1,5 +1,6 @@
 package com.seraphia.seraphia_ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data //Con esta notacion incluye los Getters y Setters para todos los campos
+@JsonIgnoreProperties("cart")
 public class User {
     @Id
     //Para dejarlo autoincremental
@@ -77,4 +79,7 @@ public class User {
     @Column(name = "state", nullable = true, length = 100)
     @Size(max = 100, message = "El estado debe de tener maximo 100 caracteres")
     private String state;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cart cart;
 }

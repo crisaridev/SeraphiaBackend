@@ -40,6 +40,6 @@ public class Cart {
 
     //Tabla Principal o tabla base
     @OneToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user",  foreignKey = @ForeignKey(name = "fk_cart_user"))
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user", foreignKey = @ForeignKey(name = "fk_cart_user"))
     private User user;
 }

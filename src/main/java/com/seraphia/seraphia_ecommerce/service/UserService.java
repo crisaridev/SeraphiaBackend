@@ -20,7 +20,7 @@ public interface UserService {
     User deleteUserById(Long id_user);
 
     //Crear un usuario o generar usuarios
-    List<User> addUsers(List<User> users);
+    User addUser(User user);
 
     //Modificar usuario, retornando el usuario modificado
     User updateUserById(Long id_user, User userUpdated);
